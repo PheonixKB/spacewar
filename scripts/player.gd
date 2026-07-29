@@ -1,52 +1,38 @@
 extends CharacterBody2D
 
-@export var thrust := 100.0
-@export var reverse_thrust := 70.0
-@export var rotation_speed := 30.0
-@export var max_speed := 800.0
-@export var wrap_margin := 20.0
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+const THRUST := 100.0
+const REVERSE_THRUST := 70.0
+const ROTATION_SPEED := 30.0
+const MAX_SPEED := 800.0
+const WRAP_MARGIN := 40.0
 var screen_size: Vector2
 
+
 func _ready():
-	# Store viewport size for screen wrapping
 	screen_size = get_viewport_rect().size
 
 func _physics_process(delta: float) -> void:
-
-	# Rotate left
+	
 	if Input.is_action_pressed("rotate_left"):
-		rotation_degrees -= rotation_speed * delta
-
-	# Rotate right
+		rotation_degrees -= ROTATION_SPEED * delta
 	if Input.is_action_pressed("rotate_right"):
-		rotation_degrees += rotation_speed * delta
+		rotation_degrees += ROTATION_SPEED * delta
 
-	# Forward direction of ship
 	var forward = Vector2.UP.rotated(rotation)
-
-	# Forward thrust
 	if Input.is_action_pressed("forward_thrust"):
-		velocity += forward * thrust * delta
-
-	# Reverse thrust
+		velocity += forward * THRUST * delta
 	if Input.is_action_pressed("reverse_thrust"):
-		velocity -= forward * reverse_thrust * delta
+		velocity -= forward * REVERSE_THRUST * delta
 
-	# Clamp maximum speed
-	if velocity.length() > max_speed:
-		velocity = velocity.normalized() * max_speed
+	if velocity.length() > MAX_SPEED:
+		velocity = velocity.normalized() * MAX_SPEED
 
 	move_and_slide()
-	wrap_screen()
+	
+func _on_visible_on_screen_notifier_2d_screen_exited():
 
-func wrap_screen():
+	global_position.x = wrapf(global_position.x,WRAP_MARGIN,screen_size.x)
 
-	if global_position.x < -wrap_margin:
-		global_position.x = screen_size.x + wrap_margin
-	elif global_position.x > screen_size.x + wrap_margin:
-		global_position.x = -wrap_margin
-
-	if global_position.y < -wrap_margin:
-		global_position.y = screen_size.y + wrap_margin
-	elif global_position.y > screen_size.y + wrap_margin:
-		global_position.y = -wrap_margin
+	global_position.y = wrapf(global_position.y,-WRAP_MARGIN,screen_size.y)

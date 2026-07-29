@@ -1,12 +1,8 @@
-[gd_scene format=3 uid="uid://q0c5riojanne"]
+[gd_scene format=3 uid="uid://ck244wsn1nj50"]
 
 [ext_resource type="PackedScene" uid="uid://citcq11bhhs0b" path="res://scenes/player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://cefwgp10l180l" path="res://scenes/star.tscn" id="2_0wfyh"]
 
-[node name="Main" type="Node" unique_id=1301874778]
-
-[node name="Star" parent="." unique_id=1660153245 instance=ExtResource("2_0wfyh")]
-position = Vector2(500, 450)
+[node name="Main" type="Node2D" unique_id=170585860]
 
 [node name="Player" parent="." unique_id=1459089273 instance=ExtResource("1_ig7tw")]
-position = Vector2(160, 728)
+position = Vector2(446, 394)
