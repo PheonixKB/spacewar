@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="Spacewar"
+run/main_scene="uid://q0c5riojanne"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1000
+window/size/viewport_height=1000
 
 [physics]
 
