@@ -6,3 +6,4 @@
 
 [node name="Player" parent="." unique_id=1459089273 instance=ExtResource("1_ig7tw")]
 position = Vector2(446, 394)
+player_prefix = "1"

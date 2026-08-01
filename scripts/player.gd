@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@export var player_prefix : String
 
 const THRUST := 100.0
 const REVERSE_THRUST := 70.0
@@ -15,15 +15,15 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	
-	if Input.is_action_pressed("rotate_left"):
+	if Input.is_action_pressed("rotate_left" + player_prefix):
 		rotation_degrees -= ROTATION_SPEED * delta
-	if Input.is_action_pressed("rotate_right"):
+	if Input.is_action_pressed("rotate_right" + player_prefix):
 		rotation_degrees += ROTATION_SPEED * delta
 
 	var forward = Vector2.UP.rotated(rotation)
-	if Input.is_action_pressed("forward_thrust"):
+	if Input.is_action_pressed("forward_thrust" + player_prefix):
 		velocity += forward * THRUST * delta
-	if Input.is_action_pressed("reverse_thrust"):
+	if Input.is_action_pressed("reverse_thrust" + player_prefix):
 		velocity -= forward * REVERSE_THRUST * delta
 
 	if velocity.length() > MAX_SPEED:
@@ -32,7 +32,5 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func _on_visible_on_screen_notifier_2d_screen_exited():
-
 	global_position.x = wrapf(global_position.x,WRAP_MARGIN,screen_size.x)
-
 	global_position.y = wrapf(global_position.y,-WRAP_MARGIN,screen_size.y)
