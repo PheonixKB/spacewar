@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var player_prefix : String
+@export var texture : Texture2D
 
 const THRUST := 100.0
 const REVERSE_THRUST := 70.0
@@ -12,6 +13,7 @@ var screen_size: Vector2
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	$Sprite2D.texture = texture
 
 func _physics_process(delta: float) -> void:
 	
