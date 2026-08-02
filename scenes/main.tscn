@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://ck244wsn1nj50"]
 
 [ext_resource type="PackedScene" uid="uid://citcq11bhhs0b" path="res://scenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cao82m7f0s4gp" path="res://scenes/GravityWell.tscn" id="2_0wfyh"]
 
 [node name="Main" type="Node2D" unique_id=170585860]
 
 [node name="Player" parent="." unique_id=1459089273 instance=ExtResource("1_ig7tw")]
-position = Vector2(446, 394)
+position = Vector2(820, 830)
+
+[node name="GravityWell" parent="." unique_id=1793359952 instance=ExtResource("2_0wfyh")]
+position = Vector2(520, 465)

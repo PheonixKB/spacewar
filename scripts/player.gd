@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var gravity_well = $"../GravityWell"
 
 const THRUST := 100.0
 const REVERSE_THRUST := 70.0
@@ -14,6 +15,22 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func _physics_process(delta: float) -> void:
+	
+	var direction = gravity_well.global_position - global_position
+	var distance = max(direction.length(), 30.0)
+	
+	if distance <= gravity_well.kill_radius:
+		print("Player entered the star!")
+		queue_free()
+		return
+	
+	
+	var gravity_force = direction.normalized() * (
+		gravity_well.gravity_strength / (distance * distance)
+	)
+	
+	velocity += gravity_force * delta
+	
 	
 	if Input.is_action_pressed("rotate_left"):
 		rotation_degrees -= ROTATION_SPEED * delta
