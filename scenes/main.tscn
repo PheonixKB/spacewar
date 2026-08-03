@@ -6,7 +6,6 @@
 [node name="Main" type="Node2D" unique_id=170585860]
 
 [node name="Player" parent="." unique_id=1459089273 instance=ExtResource("1_ig7tw")]
-position = Vector2(820, 830)
-
-[node name="GravityWell" parent="." unique_id=1793359952 instance=ExtResource("2_0wfyh")]
-position = Vector2(520, 465)
+position = Vector2(465, 405)
+player_prefix = "0"
+texture = ExtResource("2_sugp2")
